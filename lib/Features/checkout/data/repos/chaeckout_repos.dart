@@ -5,5 +5,5 @@ import '../models/payment_intent_input_model.dart';
 
 abstract class ChaeckoutRepos {
   Future<Either<Failures, void>> makePayment(
-      {required PaymentIntentInputModel aymentIntentInputModel});
+      {required PaymentIntentInputModel paymentIntentInputModel});
 }
