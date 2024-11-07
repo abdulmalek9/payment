@@ -2,8 +2,8 @@ import 'package:cheackout_payment/core/utils/api_service.dart';
 import 'package:cheackout_payment/core/utils/api_tokens.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-import '../../Features/checkout/models/payment/payment.intent.model.dart';
-import '../../Features/checkout/models/payment_intent_input_model.dart';
+import '../../Features/checkout/data/models/payment/payment.intent.model.dart';
+import '../../Features/checkout/data/models/payment_intent_input_model.dart';
 
 class StripeServicses {
   ApiService apiService = ApiService();
