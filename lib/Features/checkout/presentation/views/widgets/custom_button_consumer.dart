@@ -1,3 +1,4 @@
+import 'package:cheackout_payment/Features/checkout/data/models/payment_intent_input_model.dart';
 import 'package:cheackout_payment/Features/checkout/presentation/manger/cubit/payment_cubit_cubit.dart';
 import 'package:cheackout_payment/Features/checkout/presentation/views/thank_you_view.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,19 @@ class CustomButtonConsumer extends StatelessWidget {
             ));
           }
           if (state is PaymentCubitFailure) {
+            Navigator.pop(context);
             SnackBar snackBar =
                 SnackBar(content: Center(child: Text(state.errMessage)));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         builder: (context, state) => CustomButton(
+              onTap: () {
+                PaymentIntentInputModel paymentIntentInputModel =
+                    PaymentIntentInputModel(amount: "100", currency: "USD");
+                BlocProvider.of<PaymentCubitCubit>(context).makePayment(
+                    paymentIntentInputModel: paymentIntentInputModel);
+              },
               text: 'Continue',
               isLoading: state is PaymentCubitLoading ? true : false,
             ));

@@ -5,6 +5,6 @@ class PaymentIntentInputModel {
   PaymentIntentInputModel({required this.currency, required this.amount});
 
   tojson() {
-    return {'amount': amount, 'cuurency': currency};
+    return {'amount': "${amount}00", 'cuurency': currency};
   }
 }

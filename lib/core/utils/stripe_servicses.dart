@@ -1,5 +1,6 @@
 import 'package:cheackout_payment/core/utils/api_service.dart';
 import 'package:cheackout_payment/core/utils/api_tokens.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 import '../../Features/checkout/data/models/payment/payment.intent.model.dart';
@@ -11,6 +12,7 @@ class StripeServicses {
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     var response = await apiService.post(
         url: "https://api.stripe.com/v1/payment_intents",
+        contentType: Headers.formUrlEncodedContentType,
         body: paymentIntentInputModel.tojson(),
         token: ApiTokens.secretKey);
     Payment paymentintent = Payment.fromJson(response.data);
@@ -18,7 +20,7 @@ class StripeServicses {
   }
 
   Future initPaymentSheet({required String paymentIntentClientSecret}) async {
-    Stripe.instance.initPaymentSheet(
+    await Stripe.instance.initPaymentSheet(
       paymentSheetParameters: SetupPaymentSheetParameters(
         paymentIntentClientSecret: paymentIntentClientSecret,
         merchantDisplayName: 'Abdulmalek',
@@ -27,7 +29,7 @@ class StripeServicses {
   }
 
   Future displayPaymentSheet() async {
-    Stripe.instance.presentPaymentSheet();
+    await Stripe.instance.presentPaymentSheet();
   }
 
   Future makePayment(
